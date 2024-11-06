@@ -1,18 +1,27 @@
-// {
-//     "version": "0.2.0",
-//     "configurations": [
-//     {
-//         "name": "Python: Streamlit subpage1",
-//         "type": "python",
-//         "request": "launch",
-//         "module": "streamlit",
-//         // "program": "${workspaceFolder}/DLBLM/main.py",
-//         "args": ["run", "${workspaceFolder}/pages/app06_gemini_game특화.py"],
-//         "console": "integratedTerminal",
-//         "env": {
-//             "PYTHONUNBUFFERED": "1"
-//         }
-//     }
-//     ]
-// }
-// D:\OneDrive\human\port-folio\dailycoding\DLBLM\pages\app03_연습하기.py
+{
+    "version": "0.2.0",
+    "configurations": [
+    {
+        "name": "Python: Streamlit subpage1",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "streamlit",
+        "args": ["run", "${workspaceFolder}/pages/app06_gemini_game특화.py"],
+        "console": "integratedTerminal",
+        "env": {
+            "PYTHONUNBUFFERED": "1"
+        }
+    },
+    {
+        "name": "Python: Streamlit subpage2",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "streamlit",
+        "args": ["run", "${workspaceFolder}/pages/app07_gemini_game특화2.py"],
+        "console": "integratedTerminal",
+        "env": {
+            "PYTHONUNBUFFERED": "1"
+        }
+    }
+    ]
+}

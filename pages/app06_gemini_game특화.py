@@ -2,7 +2,6 @@ import os
 import google.generativeai as genai
 import json
 import streamlit as st
-# DeprecationWarning에 따라 langchain_community 및 langchain_huggingface로 임포트 경로 수정
 from langchain_community.embeddings import HuggingFaceEmbeddings
 from langchain_community.llms import HuggingFaceHub
 from langchain.schema import Document

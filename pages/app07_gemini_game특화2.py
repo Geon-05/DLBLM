@@ -97,7 +97,7 @@ if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
 # 사용자 입력과 버튼 처리
-topic = st.text_input('게임명을 입력하세요.')
+topic = st.text_input('게임명을 입력하세요.d')
 question = st.text_input('질문을 입력하세요.')
 if st.button('질문') and question:
     # 사용자 입력부
