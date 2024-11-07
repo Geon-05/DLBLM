@@ -11,15 +11,35 @@
 <body>
     <!-- 상단 타이틀 및 검색 바 -->
     <div class="top">
-        <img src="{% static 'htmltest\img\Title_img.png' %}" alt="Title Image" style="width:100%; max-width: 300px; margin: 0 auto; display: block;">
-        <h3 class="title">챗봇 테스트</h3>
-        <h4 class="sub-title">주제 검색</h4>
-        <!-- 같은 페이지에서 검색어를 처리하므로 action을 빈 문자열로 둡니다 -->
+        <!-- 반짝이는 별 파티클 요소들 -->
+        <div class="star s1"></div>
+        <div class="star s2"></div>
+        <div class="star s3"></div>
+        <div class="star s4"></div>
+        <div class="star s5"></div>
+        <div class="star s6"></div>
+        <div class="star s7"></div>
+        <div class="star s8"></div>
+        <div class="star s9"></div>
+        <div class="star s10"></div>
+        <div class="star s11"></div>
+        <div class="star s12"></div>
+        <div class="star s13"></div>
+        <div class="star s14"></div>
+        <div class="star s15"></div>
+    
+        <!-- 기존 상단 콘텐츠 -->
+        <h2 class="title">My Game Info Chatbot</h2>
+        <h4 class="sub-title">Game Title을 먼저 검색해주세요. 해당 게임의 상세정보를 질문하세요😁</h4>
         <form action="" method="GET" class="search-bar">
-            <input type="text" name="query" placeholder="검색할 주제를 입력하세요" required>
+            <input type="text" name="query" placeholder="Game Title을 입력하세요" required>
             <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
         </form>
     </div>
+    
+    
+    
+    
 
     <!-- 채팅 인터페이스 전체 -->
     <div class="chat-container">
@@ -27,7 +47,7 @@
         <div class="chat-screen" id="chat-screen">
             <!-- 채팅 예시 -->
             <div class="chat-bubble bot">
-                <div class="avatar"><img src="https://via.placeholder.com/40" alt="Bot" style="border-radius: 50%;"></div>
+                <div class="avatar"><img width="40" height="40" src="{% static 'htmltest\img\Bot_img.png' %}" alt="Bot" style="border-radius: 50%;"></div>
                 <div class="message">오프라인에서 사람들끼리 만나서 취미활동을 하는 것입니다. 한번 모임을 해보시는건 어떨까요?</div>
             </div>
             <div class="chat-bubble user">
