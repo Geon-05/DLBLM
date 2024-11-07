@@ -6,7 +6,7 @@
         "type": "debugpy",
         "request": "launch",
         "module": "streamlit",
-        "args": ["run", "${workspaceFolder}/pages/app06_gemini_game특화.py"],
+        "args": ["run", "${workspaceFolder}/stramlit/pages/app06_gemini_game특화.py"],
         "console": "integratedTerminal",
         "env": {
             "PYTHONUNBUFFERED": "1"
@@ -17,7 +17,18 @@
         "type": "debugpy",
         "request": "launch",
         "module": "streamlit",
-        "args": ["run", "${workspaceFolder}/pages/app07_gemini_game특화2.py"],
+        "args": ["run", "${workspaceFolder}/streamlit/pages/app07_gemini_game특화2.py"],
+        "console": "integratedTerminal",
+        "env": {
+            "PYTHONUNBUFFERED": "1"
+        }
+    },
+    {
+        "name": "Python: Streamlit subpage3",
+        "type": "debugpy",
+        "request": "launch",
+        "module": "streamlit",
+        "args": ["run", "${workspaceFolder}/streamlit/pages/app08_gemini_game특화3.py"],
         "console": "integratedTerminal",
         "env": {
             "PYTHONUNBUFFERED": "1"

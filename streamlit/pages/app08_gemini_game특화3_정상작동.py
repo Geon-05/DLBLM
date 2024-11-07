@@ -9,6 +9,16 @@ from bs4 import BeautifulSoup as bs
 import requests
 from langchain_community.vectorstores import Chroma
 
+# 데이터베이스 파일 경로
+db_path = "path_to_chroma_db"  # 실제 데이터베이스 경로로 변경
+
+# 기존 데이터베이스 파일 삭제
+try:
+    if os.path.exists(db_path):
+        os.remove(db_path)
+        print("데이터베이스 초기화됨")
+except PermissionError:
+    print("데이터베이스 파일에 접근 권한이 없습니다. 관리자 권한으로 실행하거나 파일을 수동으로 삭제해 주세요.")
 # 파일 경로 설정
 current_dir = os.path.dirname(os.path.abspath(__file__))
 target_file_path = os.path.join(current_dir, 'D:/important/APIkey.json')
@@ -73,13 +83,16 @@ def load_Korean_game(gametitle, display=5, pageno=1):
     
     return splits
 
+# vectorstore 생성 함수
 def create_vectorstore(splits):
+    # 세션에 vectorstore가 이미 존재하는 경우 재사용
+    if "vectorstore" in st.session_state:
+        return st.session_state.vectorstore
+    
     valid_splits = []
     for i, split in enumerate(splits):
-        # 임베딩 생성 과정 확인
         embedding = st.session_state.embedding.embed_query(split.page_content)
         
-        # 임베딩이 올바르게 생성되었는지 길이와 형태 출력
         if embedding and len(embedding) > 0:
             print(f"Embedding created for split {i+1}, length: {len(embedding)}")
             valid_splits.append(split)
@@ -87,7 +100,16 @@ def create_vectorstore(splits):
             print(f"Empty embedding for split {i+1}")
 
     if valid_splits:
-        vectorstore = Chroma.from_documents(documents=valid_splits, embedding=st.session_state.embedding )
+        # 새로운 vectorstore 생성 및 세션에 저장
+        vectorstore = Chroma.from_documents(
+        documents=valid_splits,
+        embedding=st.session_state.embedding,
+        persist_directory="path_to_chroma_db",  # 데이터베이스 경로 지정
+        collection_name="my_collection"
+    )
+
+        # 생성된 vectorstore를 세션 상태에 저장하여 재사용
+        st.session_state.vectorstore = vectorstore
         return vectorstore
     else:
         raise ValueError("No valid documents with embeddings to add to vector store.")
@@ -102,9 +124,6 @@ question = st.text_input('질문을 입력하세요.')
 if st.button('질문') and question:
     # 사용자 입력부
     splits = load_Korean_game(topic)
-    # 사용자의 질문을 히스토리에 추가
-    st.session_state.chat_history.append(f"[사용자]: {question}")
-    st.text(f'[사용자]\n{question}')
     
     if splits:
         st.session_state.vectorstore = create_vectorstore(splits)
@@ -116,11 +135,15 @@ if st.button('질문') and question:
     response = st.session_state.model.generate_content(prompt)
     answer = response.candidates[0].content.parts[0].text
 
-    # 질문과 답변만 출력
+    # 질문과 답변 출력
     st.text(f"질문: {question}")
-    st.text(f"답변: {answer}")
+    st.success(f"답변: {answer}")
     
-    # # 전체 히스토리 출력
-    # st.text('--------------------------------------------')
-    # st.text("\n".join(st.session_state.chat_history))
+    # 사용자의 질문을 히스토리에 추가
+    st.session_state.chat_history.append(f"[사용자]: {question}")
+    st.session_state.chat_history.append(f"[답변]: {answer}")
+    
+    # 전체 히스토리 출력
+    st.text('--------------------------------------------')
+    st.text("\n".join(st.session_state.chat_history))
 
