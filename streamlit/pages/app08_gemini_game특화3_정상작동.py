@@ -131,7 +131,8 @@ if st.button('질문') and question:
         print("No content to create vector store.")
         
     context_doc = st.session_state.vectorstore.similarity_search(question, k=4)
-    prompt = f"Context: {context_doc}\nQuestion: {question}\nAnswer in a complete sentence:"
+    # prompt = f"Context: {context_doc}\nQuestion: {question}\nAnswer in a complete sentence:"
+    prompt = '사과의 종류를 알려줘'
     response = st.session_state.model.generate_content(prompt)
     answer = response.candidates[0].content.parts[0].text
 

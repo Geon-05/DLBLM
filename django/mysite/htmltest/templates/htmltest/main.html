@@ -1,11 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Profile Update</title>
+    <!-- 스타일링이 필요하면 Bootstrap CDN을 추가할 수 있습니다 -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>장고에서 html띄우기!</h1>
+    <h1>게임정보 ChatBot</h1>
+    <label for="title">게임명</label>
+    <input id="title" type="text" class="form-control" placeholder="게임명을 입력하세요."><br>
+    <label for="question">질문</label>
+    <input id="question" type="text" class="form-control" placeholder="질문을 입력하세요.">
+    <br>
+    <button class="btn btn-lg btn-info btn-block" type="submit">질문하기</button>
 </body>
 </html>

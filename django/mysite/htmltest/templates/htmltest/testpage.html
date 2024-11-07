@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ko">
+    <head>
+        {% load static %}
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>MY GAME CHATBOT</title>
+        <script src="https://kit.fontawesome.com/77ad8525ff.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="{% static 'htmltest/css/talk.css' %}">
+    </head>
+<body>
+    <!-- 상단 타이틀 및 검색 바 -->
+    <div class="top">
+        <img src="{% static 'htmltest\img\Title_img.png' %}" alt="Title Image" style="width:100%; max-width: 300px; margin: 0 auto; display: block;">
+        <h3 class="title">챗봇 테스트</h3>
+        <h4 class="sub-title">주제 검색</h4>
+        <!-- 같은 페이지에서 검색어를 처리하므로 action을 빈 문자열로 둡니다 -->
+        <form action="" method="GET" class="search-bar">
+            <input type="text" name="query" placeholder="검색할 주제를 입력하세요" required>
+            <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+        </form>
+    </div>
+
+    <!-- 채팅 인터페이스 전체 -->
+    <div class="chat-container">
+        <!-- 채팅 말풍선이 표시되는 영역 -->
+        <div class="chat-screen" id="chat-screen">
+            <!-- 채팅 예시 -->
+            <div class="chat-bubble bot">
+                <div class="avatar"><img src="https://via.placeholder.com/40" alt="Bot" style="border-radius: 50%;"></div>
+                <div class="message">오프라인에서 사람들끼리 만나서 취미활동을 하는 것입니다. 한번 모임을 해보시는건 어떨까요?</div>
+            </div>
+            <div class="chat-bubble user">
+                <div class="message">휴대폰은 어떻게 인증해?</div>
+            </div>
+        </div>
+
+        <!-- 입력 창 -->
+        <div class="input-container">
+            <input type="text" class="input-box" placeholder="메시지를 입력하세요">
+            <button class="submit-button">전송</button>
+        </div>
+    </div>
+
+    <script>
+        var div = document.getElementById("chat-screen");
+        div.scrollTop = div.scrollHeight;
+    </script>
+</body>
+</html>

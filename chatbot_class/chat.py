@@ -69,6 +69,8 @@ def rag_chatbot(question):
         
     context_docs = "\n\n".join([f"{i+1}번째 문서:\n{doc.page_content}" for i, doc in enumerate(context_docs)])
 
+    # 질문 필수단어요소 추출후 프롬포트({질문})에 삽입
+    
     # prompt = f"Context: {context_docs}\nQuestion: {question}\nAnswer in a complete sentence:"
     prompt = f"문맥: {context_docs}\n질문: {question}\n답변:"
     # response = gemini_model(prompt)
