@@ -28,7 +28,7 @@
         "type": "debugpy",
         "request": "launch",
         "module": "streamlit",
-        "args": ["run", "${workspaceFolder}/streamlit/pages/app08_gemini_game특화3.py"],
+        "args": ["run", "${workspaceFolder}/streamlit/pages/app08_gemini_game특화3_정상작동.py"],
         "console": "integratedTerminal",
         "env": {
             "PYTHONUNBUFFERED": "1"

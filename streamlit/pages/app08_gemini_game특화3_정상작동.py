@@ -138,12 +138,14 @@ if st.button('질문') and question:
     # 질문과 답변 출력
     st.text(f"질문: {question}")
     st.success(f"답변: {answer}")
+    st.success(f"참고문서: {context_doc}")
+    
     
     # 사용자의 질문을 히스토리에 추가
-    st.session_state.chat_history.append(f"[사용자]: {question}")
+    st.session_state.chat_history.append(f"[사용자]: {question}\n")
     st.session_state.chat_history.append(f"[답변]: {answer}")
     
     # 전체 히스토리 출력
     st.text('--------------------------------------------')
-    st.text("\n".join(st.session_state.chat_history))
+    st.info("\n".join(st.session_state.chat_history))
 
