@@ -44,6 +44,18 @@
         "env": {
             "PYTHONUNBUFFERED": "1"
         }
+    },
+    {
+        "name": "Django 서버 디버깅",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/django/vuetest/manage.py",
+        "args": ["runserver"],
+        "django": true,
+        "console": "integratedTerminal",
+        "env": {
+            "PYTHONUNBUFFERED": "1"
+        }
     }
     ]
 }
