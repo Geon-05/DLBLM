@@ -12,21 +12,9 @@
     <!-- 상단 타이틀 및 검색 바 -->
     <div class="top">
         <!-- 반짝이는 별 파티클 요소들 -->
-        <div class="star s1"></div>
-        <div class="star s2"></div>
-        <div class="star s3"></div>
-        <div class="star s4"></div>
-        <div class="star s5"></div>
-        <div class="star s6"></div>
-        <div class="star s7"></div>
-        <div class="star s8"></div>
-        <div class="star s9"></div>
-        <div class="star s10"></div>
-        <div class="star s11"></div>
-        <div class="star s12"></div>
-        <div class="star s13"></div>
-        <div class="star s14"></div>
-        <div class="star s15"></div>
+        {% for i in star_range %}
+            <div class="star s{{ i }}"></div>
+        {% endfor %}
     
         <!-- 기존 상단 콘텐츠 -->
         <h2 class="title">My Game Info Chatbot</h2>
@@ -37,22 +25,26 @@
         </form>
     </div>
     
-    
-    
-    
-
     <!-- 채팅 인터페이스 전체 -->
     <div class="chat-container">
         <!-- 채팅 말풍선이 표시되는 영역 -->
         <div class="chat-screen" id="chat-screen">
-            <!-- 채팅 예시 -->
+            <!-- 채팅 -->
             <div class="chat-bubble bot">
                 <div class="avatar"><img width="40" height="40" src="{% static 'htmltest\img\Bot_img.png' %}" alt="Bot" style="border-radius: 50%;"></div>
-                <div class="message">오프라인에서 사람들끼리 만나서 취미활동을 하는 것입니다. 한번 모임을 해보시는건 어떨까요?</div>
+                <div class="message">안녕하세요. 게임컨텐츠에대한 정보를 알려드릴게요! 질문을 시작해볼까요?😎</div>
             </div>
             <div class="chat-bubble user">
-                <div class="message">휴대폰은 어떻게 인증해?</div>
+                <div class="message">질문을 입력하세요😁</div>
             </div>
+
+        </div>
+
+        <!-- 😎수정부분 -->
+        <div for chat in range(len( {$this.chatting_list} ))>
+
+            {result}
+
         </div>
 
         <!-- 입력 창 -->
@@ -66,5 +58,7 @@
         var div = document.getElementById("chat-screen");
         div.scrollTop = div.scrollHeight;
     </script>
+    <!-- 자바스크립트 파일 로드 -->
+    <script src="{% static 'htmltest/js/talk.js' %}"></script>
 </body>
 </html>
