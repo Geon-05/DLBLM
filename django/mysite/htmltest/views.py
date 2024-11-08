@@ -13,6 +13,7 @@ def testpage(request):
     context = {
         "query": query,
         "results": results,
+        'star_range': range(1, 16),  # 1부터 15까지의 범위를 템플릿에 전달
     }
     return render(request, "htmltest/testpage.html", context)
 
@@ -24,10 +25,3 @@ def hello0(str: ):
     data = python function 호출
     
     return data
-    
-    
-def testpage(request):
-    context = {
-        'star_range': range(1, 16)  # 1부터 15까지의 범위를 템플릿에 전달
-    }
-    return render(request, "htmltest/testpage.html", context)

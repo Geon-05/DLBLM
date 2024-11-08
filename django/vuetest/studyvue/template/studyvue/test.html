@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MY GAME CHATBOT</title>
+  <script src="https://kit.fontawesome.com/77ad8525ff.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="{% static 'studyvue/css/talk.css' %}">
+</head>
+<body>
+  <!-- Vue 앱이 렌더링될 요소 -->
+  <div id="app">
+
+  <!-- 상단 타이틀 및 검색 바 -->
+  <div class="top">
+    <!-- 반짝이는 별 파티클 요소들 -->
+    {% for i in star_range %}
+        <div class="star s{{ i }}"></div>
+    {% endfor %}
+
+    <!-- 기존 상단 콘텐츠 -->
+    <h2 class="title">My Game Info Chatbot</h2>
+    <h4 class="sub-title">Game Title을 먼저 검색해주세요. 해당 게임의 상세정보를 질문하세요😁</h4>
+    <form action="" method="GET" class="search-bar">
+        <input type="text" name="query" placeholder="Game Title을 입력하세요" required>
+        <button type="submit" class="search-button"><i class="fa-solid fa-search"></i></button>
+    </form>
+  </div>
+
+  <!-- 채팅 인터페이스 전체 -->
+  <div class="chat-container">
+    <!-- 채팅 말풍선이 표시되는 영역 -->
+    <div class="chat-screen" id="chat-screen">
+        <!-- 채팅 -->
+        <div class="chat-bubble bot">
+            <div class="avatar"><img width="40" height="40" src="{% static 'studyvue\img\Bot_img.png' %}" alt="Bot" style="border-radius: 50%;"></div>
+            <div class="message">안녕하세요. 게임컨텐츠에대한 정보를 알려드릴게요! 질문을 시작해볼까요?😎</div>
+        </div>
+        <div class="chat-bubble user">
+            <div class="message">질문을 입력하세요😁</div>
+        </div>
+
+    </div>
+
+    <!-- 😎수정부분 -->
+    <div for chat in range(len( {$this.chatting_list} ))>
+
+        {result}
+
+    </div>
+
+    <!-- 입력 창 -->
+    <div class="input-container">
+        <input type="text" class="input-box" placeholder="메시지를 입력하세요">
+        <button class="submit-button" onclick="send_message">전송</button>
+    </div>
+  </div>
+
+  <script>
+    var div = document.getElementById("chat-screen");
+    div.scrollTop = div.scrollHeight;
+  </script>
+  <!-- Django 정적 파일 URL로 Vue 번들 파일을 참조 -->
+  <!-- <script src="{% static 'vue/assets/index-BO2t2Q_V.js' %}"></script> -->
+</div>
+</body>
+</html>
