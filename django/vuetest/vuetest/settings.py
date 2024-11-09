@@ -131,3 +131,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Vue 서버 주소
 ]
+
+# 데이터베이스 파일 경로 설정
+DB_PATH = os.path.join(BASE_DIR, 'D:/important/database')  # 실제 데이터베이스 파일 경로로 변경
+
+# API 키 파일 경로 설정
+API_KEY_PATH = os.getenv('API_KEY_PATH', 'D:/important/APIkey.json')

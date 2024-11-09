@@ -8,7 +8,7 @@ const app = Vue.createApp({
             inputQuestion: '',     // 입력된 텍스트를 임시 저장
             inputSubject: '',     // 입력된 텍스트를 임시 저장
             chatHistory: [],   // 채팅 기록을 저장할 배열
-            starRange: Array.from({ length: 15 }, (_, i) => i + 1), // 1부터 20까지의 숫자 배열 생성
+            starRange: Array.from({ length: 15 }, (_, i) => i + 1), // 1부터 15까지의 숫자 배열 생성
             subjectResponse: ''    // 서버 응답을 저장할 변수
         };
     },
@@ -20,14 +20,14 @@ const app = Vue.createApp({
 
                 // Django API에 메시지 전송
                 try {
-                    const response = await axios.post('/send_message', { message: this.inputQuestion });
+                    const response = await axios.post('http://127.0.0.1:8000/studyvue/send_message', { message: this.inputQuestion });
                     const botResponse = response.data.response;
                     
                     // 챗봇의 응답을 추가
                     this.chatHistory.push({ text: botResponse, sender: 'bot' });
                 } catch (error) {
                     console.error("메시지 전송 오류:", error);
-                    this.chatHistory.push({ text: "서버에 연결할 수 없습니다.", sender: 'bot' });
+                    this.chatHistory.push({ text: `서버에 연결할 수 없습니다. 오류: ${error.message}`, sender: 'bot' });
                 }
                 // 입력 필드 초기화
                 this.inputQuestion = '';
@@ -43,6 +43,7 @@ const app = Vue.createApp({
                     this.subjectResponse = response.data.response;
                 } catch (error) {
                     console.error("메시지 전송 오류:", error);
+                    this.subjectResponse = "서버에 연결할 수 없습니다.";
                 }
             }
         }
