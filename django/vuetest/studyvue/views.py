@@ -10,6 +10,11 @@ def send_message(request):
     bot_response = f"챗봇 응답: {user_message}"
     return Response({"response": bot_response})
 
+@api_view(['GET'])
+def send_subject(request):
+    user_subject = request.query_params.get('subject')  # GET 요청에서 매개변수 받기
+    return Response({"response": user_subject})
+
 
 def studyvue(request):
     query = request.GET.get("query")

@@ -17,12 +17,13 @@
       <div v-for="i in starRange" :key="i" class="star" :class="'s' + i"></div>
       <h2 class="title">My Game Info Chatbot</h2>
       <h4 class="sub-title">Game Title을 먼저 검색해주세요. 해당 게임의 상세정보를 질문하세요😁</h4>
-      <form action="" method="GET" class="search-bar">
-        <input type="text" name="query" placeholder="Game Title을 입력하세요" required />
+      <form @submit.prevent="subject_chk" class="search-bar">
+        <input type="text" name="subject" v-model="inputSubject" placeholder="Game Title을 입력하세요" required />
         <button type="submit" class="search-button">
           <i class="fa-solid fa-search"></i>
         </button>
       </form>
+      <h2 class="title" v-text="formattedSubject"></h2>
     </div>
 
     <div class="chat-container">
@@ -40,8 +41,8 @@
       </div>
 
       <div class="input-container">
-        <input type="text" class="input-box" v-model="inputText" placeholder="메시지를 입력하세요" />
-        <button type="button" class="submit-button" @click="click">전송</button>
+        <input type="text" class="input-box" v-model="inputQuestion" placeholder="메시지를 입력하세요" />
+        <button type="button" class="submit-button" @click="question_chk">전송</button>
       </div>
     </div>
   </div>
