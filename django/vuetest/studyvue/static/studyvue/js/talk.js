@@ -18,13 +18,14 @@ const app = Vue.createApp({
 
                 // Django API에 메시지 전송
                 try {
-                    const response = await axios.post('/send_message/', { message: this.inputText });
+                    const response = await axios.post('/send_message', { message: this.inputText });
                     const botResponse = response.data.response;
                     
                     // 챗봇의 응답을 추가
                     this.chatHistory.push({ text: botResponse, sender: 'bot' });
                 } catch (error) {
                     console.error("메시지 전송 오류:", error);
+                    this.chatHistory.push({ text: "서버에 연결할 수 없습니다.", sender: 'bot' });
                 }
                 console.log(this.inputText, botResponse)
                 // 입력 필드 초기화

@@ -6,8 +6,8 @@ PetiteVue.createApp({
             .then(response => response.json())
             .then((data) => {  // 화살표 함수를 사용해 this 스코프 유지
                 
-                // 서버 응답 데이터를 testMessage에 할당
-                // 콘솔에 결과 표시
+                DOCOMETHING // 서버 응답 데이터를 testMessage에 할당
+                DOCOMETHING // 콘솔에 결과 표시
             })
             .catch(error => console.error('Error fetching data:', error));
     }
