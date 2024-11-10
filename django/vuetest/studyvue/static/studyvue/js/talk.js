@@ -20,7 +20,7 @@ const app = Vue.createApp({
 
                 // Django API에 메시지 전송
                 try {
-                    const response = await axios.post('http://127.0.0.1:8000/studyvue/send_message', { message: this.inputQuestion });
+                    const response = await axios.post('http://127.0.0.1:8000/studyvue/send_message/', { message: this.inputQuestion });
                     const botResponse = response.data.response;
                     
                     // 챗봇의 응답을 추가
