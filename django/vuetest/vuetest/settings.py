@@ -137,3 +137,6 @@ DB_PATH = os.path.join(BASE_DIR, 'D:/important/database')  # 실제 데이터베
 
 # API 키 파일 경로 설정
 API_KEY_PATH = os.getenv('API_KEY_PATH', 'D:/important/APIkey.json')
+
+# 설정중 URL주소 '/' 관련
+APPEND_SLASH = True

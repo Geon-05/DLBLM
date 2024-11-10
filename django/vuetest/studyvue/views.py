@@ -27,6 +27,7 @@ def load_api_key():
     try:
         with open(api_key_path, 'r') as file:
             data = json.load(file)
+            print("API 키 로딩이 완료되었습니다.")
             return data.get('Gemini')
     except FileNotFoundError:
         print("API 키 파일을 찾을 수 없습니다.")
@@ -36,18 +37,20 @@ def load_api_key():
         return None
     
 # 모델 생성부 -----------------------------------------
-# Gemini모델 생성
 api_key = load_api_key()
 if api_key:
+    # Gemini모델 생성
     genai.configure(api_key=api_key)
     model = genai.GenerativeModel('gemini-1.5-flash')
+    print("Gemini 로딩이 완료되었습니다.")
     
-# SKT 한국어 임베딩 및 QA 모델 설정
-embedding = HuggingFaceEmbeddings(
-    model_name='jhgan/ko-sroberta-nli',
-    model_kwargs={'device': 'cpu'},
-    encode_kwargs={'normalize_embeddings': True}
-)
+    # sroberta모델 생성
+    embedding = HuggingFaceEmbeddings(
+        model_name='jhgan/ko-sroberta-nli',
+        model_kwargs={'device': 'cpu'},
+        encode_kwargs={'normalize_embeddings': True}
+    )
+    print("sroberta 로딩이 완료되었습니다.")
 # -----------------------------------------------------
 
 # 검색부
@@ -70,9 +73,9 @@ def load_Korean_game(gametitle, display=5, pageno=1):
 
 # Vectorstore 생성
 def create_vectorstore(splits):
-    vectorstore = Chroma.from_texts(
-        texts=[split.page_content for split in splits],
-        embedding=embedding,  # embedding 함수 전달
+    vectorstore = Chroma.from_documents(
+        documents=splits,
+        embedding=embedding,  # `embedding` 인스턴스를 직접 전달
         persist_directory=db_path,
         collection_name="my_collection"
     )
@@ -83,11 +86,12 @@ vectorstore = None
 @api_view(['GET'])
 def send_subject(request):
     user_subject = request.query_params.get('subject')
-    
+    print(f"검색요청 : {user_subject}")
     splits = load_Korean_game(user_subject)
     global vectorstore
     if splits:
         vectorstore = create_vectorstore(splits)
+        print(vectorstore)
     else:
         print("No content to create vector store.")
     
@@ -101,6 +105,7 @@ def send_message(request):
     
     if vectorstore:
         context_doc = vectorstore.similarity_search(user_message, k=4)
+        print(context_doc)
         prompt = f"Context: {context_doc}\nQuestion: {user_message}\nAnswer in a complete sentence:"
         
         response = model.generate_content(prompt)
