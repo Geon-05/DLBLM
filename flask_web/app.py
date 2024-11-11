@@ -6,10 +6,11 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
-@app.route('/DOSOMETHING', methods=['POST'])
+@app.route('/get_data', methods=['POST'])
 def perform_task():
-    result = "Task completed successfully!"
-    return jsonify(result=result)
+    message = "성공적으로 파이썬 함수 호출!!"
+    result = jsonify(result=message)
+    return result
 
 if __name__ == '__main__':
     app.run(debug=True)

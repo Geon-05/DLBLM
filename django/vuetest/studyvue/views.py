@@ -64,7 +64,7 @@ def load_Korean_game(gametitle, display=5, pageno=1):
     soup = bs(response.text, 'xml') 
     content = soup.find_all('item')  # item 태그들 추출
     
-    documents = [Document(page_content=i.text, metadata={"source": f"doc{idx+1}"}) for idx, i in enumerate(content)]
+    documents = [Document(page_content=i.text, metadata={"source": f"doc{idx+1}", "주제": "화이트데이" }) for idx, i in enumerate(content)]
     
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=1000, chunk_overlap=200)
     splits = text_splitter.split_documents(documents)
@@ -87,8 +87,8 @@ vectorstore = None
 def send_subject(request):
     user_subject = request.query_params.get('subject')
     print(f"검색요청 : {user_subject}")
-    splits = load_Korean_game(user_subject)
     global vectorstore
+    splits = load_Korean_game(user_subject)
     if splits:
         vectorstore = create_vectorstore(splits)
         print(vectorstore)
@@ -96,7 +96,6 @@ def send_subject(request):
         print("No content to create vector store.")
     
     return Response({"response": user_subject or "No subject provided"})
-
 
 @api_view(['POST'])
 def send_message(request):
