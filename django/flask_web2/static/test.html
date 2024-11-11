@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js & CSS Test</title>
+    <!-- 현재 폴더에 있는 style.css를 연결 -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+</head>
+<body>
+    <div id="app">
+        <button @click="fetchResult">작업 수행</button>
+        <p v-if="result">{{ result }}</p>
+    </div>
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                result: 'Initial Test' // 초기값 설정
+            },
+            methods: {
+                fetchResult() {
+                    this.result = "Button Clicked!";
+                }
+            }
+        });
+    </script>
+</body>
+</html>

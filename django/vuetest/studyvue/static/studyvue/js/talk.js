@@ -14,13 +14,24 @@ const app = Vue.createApp({
     },
     methods: {
         async question_chk() {
-            if (this.inputQuestion.trim() !== '') {
+            if (this.inputQuestion.trim() !== '' && this.inputSubject.trim() !== '') {
                 // 사용자의 메시지를 추가
                 this.chatHistory.push({ text: this.inputQuestion, sender: 'user' });
 
                 // Django API에 메시지 전송
                 try {
-                    const response = await axios.post('http://127.0.0.1:8000/studyvue/send_message/', { message: this.inputQuestion });
+                    const response = await axios.post(
+                        'http://127.0.0.1:8000/studyvue/send_message/', 
+                        {
+                            message: this.inputQuestion,
+                            subject: this.inputSubject  // 게임 타이틀 정보도 함께 전송
+                        },
+                        {
+                            headers: {
+                                'Content-Type': 'application/json'  // JSON 형식으로 전송
+                            }
+                        }
+                    );
                     const botResponse = response.data.response;
                     
                     // 챗봇의 응답을 추가
@@ -31,6 +42,9 @@ const app = Vue.createApp({
                 }
                 // 입력 필드 초기화
                 this.inputQuestion = '';
+            }else {
+                console.error("게임 타이틀과 질문을 모두 입력해야 합니다.");
+                this.chatHistory.push({ text: '게임 타이틀과 질문을 모두 입력해주세요.', sender: 'bot' });
             }
         },
         async subject_chk() {
@@ -46,6 +60,13 @@ const app = Vue.createApp({
                     this.subjectResponse = "서버에 연결할 수 없습니다.";
                 }
             }
+        },
+        scrollToBottom() {
+            const chatScreen = document.getElementById('chat-screen');
+            chatScreen.scrollTo({
+                top: chatScreen.scrollHeight,
+                behavior: 'smooth'
+            });
         }
     },
     computed: {

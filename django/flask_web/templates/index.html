@@ -12,6 +12,14 @@
     <div>
         <p v-text="testMessage"></p> <!-- testMessage 값 표시 -->
         <button @click="fetchData">Fetch Data from Server</button>
+        
+        <p v-text="square_value"></p>
+        <button @click="squareData">제곱</button>
+
+        <input type="number" v-model="num1" placeholder="첫 번째 숫자">
+        <input type="number" v-model="num2" placeholder="두 번째 숫자">
+        <p v-text="add_value"></p>
+        <button @click="addData">더하기</button>
     </div>
 </body>
 </html>

@@ -18,7 +18,7 @@
       <h2 class="title">My Game Info Chatbot</h2>
       <h4 class="sub-title">Game Title을 먼저 검색해주세요. 해당 게임의 상세정보를 질문하세요😁</h4>
       <form @submit.prevent="subject_chk" class="search-bar">
-        <input type="text" name="subject" v-model="inputSubject" placeholder="Game Title을 입력하세요" required />
+        <input type="text" id="gameTitle" name="gameTitle" v-model="inputSubject" placeholder="Game Title을 입력하세요" required />
         <button type="submit" class="search-button">
           <i class="fa-solid fa-search"></i>
         </button>
