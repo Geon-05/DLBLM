@@ -1,9 +1,9 @@
 import os
+import secrets
 
-# 예시 환경 설정
 class Config:
-    SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key')
-    DEBUG = False
+    SECRET_KEY = secrets.token_hex(16)  # 안전한 랜덤 키 생성
+    DEBUG = True
 
 class DevelopmentConfig(Config):
     DEBUG = True

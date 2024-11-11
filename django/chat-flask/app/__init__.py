@@ -1,12 +1,10 @@
+import os
 from flask import Flask
 
-def create_app(config_filename=None):
-    app = Flask(__name__)
+def create_app(config_class='config.Config'):
+    app = Flask(__name__, template_folder=os.path.join(os.path.dirname(__file__), '../templates'))
+    app.config.from_object(config_class)
 
-    if config_filename:
-        app.config.from_pyfile(config_filename)  # 설정 파일 로드
-
-    # 블루프린트나 다른 초기화 코드 등록
     from .routes import main
     app.register_blueprint(main)
 
