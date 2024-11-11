@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MY GAME CHATBOT</title>
+    <script src="https://kit.fontawesome.com/77ad8525ff.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='chat.css') }}">
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+</head>
+<body>
+    <div id="app">
+        <!-- Chatbot Header -->
+        <div class="top">
+          <div v-for="i in starRange" :key="i" class="star" :class="'s' + i"></div>
+          <h2 class="title">My Game Info Chatbot</h2>
+          <h4 class="sub-title">Game Title을 먼저 검색해주세요. 해당 게임의 상세정보를 질문하세요😁</h4>
+          <form @submit.prevent="subject_chk" class="search-bar">
+            <input type="text" id="gameTitle" name="gameTitle" v-model="inputSubject" placeholder="Game Title을 입력하세요" required />
+            <button type="submit" class="search-button">
+              <i class="fa-solid fa-search"></i>
+            </button>
+          </form>
+          <h2 class="title" v-text="formattedSubject"></h2>
+        </div>
+
+        <!-- Chat Display Area -->
+        <div class="chat-container">
+          <div class="chat-screen" id="chat-screen">
+            <div class="chat-bubble bot">
+              <div class="avatar">
+                <img width="40" height="40" src="{{ url_for('static', filename='images/chat/Bot_img.png') }}" alt="Bot" style="border-radius: 50%;">
+              </div>
+              <div class="message">안녕하세요. 게임컨텐츠에 대한 정보를 알려드릴게요! 질문을 시작해볼까요?😎</div>
+            </div>
+            <div v-for="(chat, index) in chatHistory" :key="index" class="chat-bubble" :class="chat.sender">
+              <div class="avatar" v-if="chat.sender === 'bot'">
+                <img width="40" height="40" src="{{ url_for('static', filename='images/chat/Bot_img.png') }}" alt="Bot" style="border-radius: 50%" />
+              </div>
+              <div class="message" v-text="chat.text"></div>
+            </div>
+          </div>
+
+          <!-- Input Area -->
+          <div class="input-container">
+            <input type="text" class="input-box" v-model="inputQuestion" placeholder="메시지를 입력하세요" />
+            <button type="button" class="submit-button" @click="question_chk">전송</button>
+          </div>
+        </div>
+      </div>
+      
+    <!-- 로컬 자바스크립트 파일 -->
+    <script src="{{ url_for('static', filename='chat.js') }}"></script>
+</body>
+</html>
