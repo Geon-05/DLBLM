@@ -9,7 +9,9 @@ PetiteVue.createApp({
             .then(response => response.json())
             .then((data) => {  // 화살표 함수를 사용해 this 스코프 유지
                 // 1. 서버 응답 데이터를 testMessage에 할당
+                this.testMessage = data.result
                 // 2. 콘솔에 결과 표시
+                console.log('data:',this.testMessage)
                 this.isFetched = true; // 데이터를 가져온 후 isFetched를 true로 변경
                 
             })
