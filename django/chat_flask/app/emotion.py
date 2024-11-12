@@ -4,7 +4,8 @@ from transformers import AutoModelForSequenceClassification, AutoTokenizer, pipe
 # 모델과 토크나이저, 파이프라인 설정을 전역으로
 num_labels = 3
 model = AutoModelForSequenceClassification.from_pretrained("skt/kogpt2-base-v2", num_labels=num_labels)
-model.load_state_dict(torch.load("data/model/model_checkpoint.pt", map_location=torch.device('cpu')))
+device = torch.device('cpu')
+model.load_state_dict(torch.load("D:\OneDrive\human\port-folio\personal_project\DLBLM\django\chat_flask\data\model\model_checkpoint.pt", map_location=device))
 tokenizer = AutoTokenizer.from_pretrained('skt/kogpt2-base-v2')
 
 pipe = pipeline(

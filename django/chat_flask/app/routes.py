@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, send_from_directory, current_app, jsonify, request
 from app.emotion import emotion_chk
+from app.chat import subject_chk
 
 
 main = Blueprint('main', __name__)
@@ -25,9 +26,18 @@ def emotion():
     return render_template('emotion.html')
 
 
-@main.route('/get_sentence', methods=['POST'])
-def perform_task():
+@main.route('/post_sentence', methods=['POST'])
+def post_sentence():
     data = request.get_json()
     sentence = data.get('sentence', '')
     emotion_result = emotion_chk(sentence)
     return jsonify(emotion_result=emotion_result)
+
+@main.route('/get_subject', methods=['GET'])
+def get_subject():
+    gametitle = request.args.get('gameTitle', '')
+    if not gametitle:
+        return jsonify({"error": "Subject parameter is missing"}), 400
+
+    subject_result = subject_chk(gametitle)
+    return jsonify(subject_result=subject_result)

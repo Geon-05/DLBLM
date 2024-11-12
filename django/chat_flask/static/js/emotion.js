@@ -7,7 +7,7 @@ const app = PetiteVue.createApp({
     emotion_result: '',
 
     emotion_chk() {
-        fetch('/get_sentence', { 
+        fetch('/post_sentence', { 
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

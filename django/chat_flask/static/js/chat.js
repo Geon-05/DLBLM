@@ -16,9 +16,12 @@ const app = Vue.createApp({
         async subject_chk() {
             if (this.inputSubject.trim() !== '') {
                 try {
-                    // Django API에 GET 요청 보내기
-                    const response = await fetch(`http://127.0.0.1:8000/studyvue/send_subject/?subject=${encodeURIComponent(this.inputSubject)}`, {
-                        method: 'GET'
+                    // Flask API에 GET 요청 보내기
+                    const response = await fetch(`/get_subject?gameTitle=${encodeURIComponent(this.inputSubject)}`, {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
                     });
         
                     if (!response.ok) {
@@ -86,4 +89,4 @@ const app = Vue.createApp({
             return `Game Title : ${this.subjectResponse || "🔍"}`;
         }
     }
-})
+}).mount("#app");
