@@ -56,6 +56,18 @@
         "env": {
             "PYTHONUNBUFFERED": "1"
         }
+    },
+    {
+        "name": "Django emotion 디버깅",
+        "type": "debugpy",
+        "request": "launch",
+        "program": "${workspaceFolder}/django/chat_flask/app.py",
+        "args": ["runserver"],
+        "django": true,
+        "console": "integratedTerminal",
+        "env": {
+            "PYTHONUNBUFFERED": "1"
+        }
     }
     ]
 }
