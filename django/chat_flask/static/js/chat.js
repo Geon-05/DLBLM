@@ -18,10 +18,7 @@ const app = Vue.createApp({
                 try {
                     // Flask API에 GET 요청 보내기
                     const response = await fetch(`/get_subject?gameTitle=${encodeURIComponent(this.inputSubject)}`, {
-                        method: 'GET',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        }
+                        method: 'GET'
                     });
         
                     if (!response.ok) {
@@ -29,7 +26,7 @@ const app = Vue.createApp({
                     }
         
                     const data = await response.json();
-                    this.subjectResponse = data.response;
+                    this.subjectResponse = data.subject_result;
                 } catch (error) {
                     console.error("메시지 전송 오류:", error);
                     this.subjectResponse = "서버에 연결할 수 없습니다.";
