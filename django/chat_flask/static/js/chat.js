@@ -26,7 +26,7 @@ const app = Vue.createApp({
                     }
         
                     const data = await response.json();
-                    this.subjectResponse = data.subject_result;
+                    this.subjectResponse = data.gametitle;
                 } catch (error) {
                     console.error("메시지 전송 오류:", error);
                     this.subjectResponse = "서버에 연결할 수 없습니다.";
